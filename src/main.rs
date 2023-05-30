@@ -3,7 +3,7 @@ use std::{env, fs};
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let config = parse_config(&args);
+    let config = Config::new(&args);
 
     println!("Searching for {}", config.query);
     println!("In file {}", config.file_path);
@@ -18,9 +18,13 @@ struct Config {
     file_path: String
 }
 
-fn parse_config(args: &[String]) -> Config {
-    let query = &args[1].clone();
-    let file_path = &args[2].clone();
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = &args[1].clone();
+        let file_path = &args[2].clone();
 
-    Config{query: query.to_string(), file_path: file_path.to_string()}
+        Config{query: query.to_string(), file_path: file_path.to_string()}
+    }
 }
+
+
